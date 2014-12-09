@@ -6,7 +6,6 @@ var exec = require('child_process').exec,
     _ = require('lodash'),
     defaultOptions = {
         rvmPath: path.resolve('OpenFinRVM.exe'),
-        configPath: 'http://localhost:5000/app.json',
         rvmUrl: 'https://developer.openfin.co/release/rvm/latest'
     };
 
@@ -23,6 +22,9 @@ function launchOpenFin(options) {
                     }
                 });
             } else {
+                console.log('no rvm found at specified location, downloading');
+                //make sure the second time around we specify the local repository.
+                defaultOptions.rvmPath = path.resolve('OpenFinRVM.exe');
                 rvmDownloader.download(defaultOptions.rvmUrl, launchOpenFin);
             }
         });
