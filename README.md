@@ -1,5 +1,6 @@
 
 #openfin-launcher
+[![Build Status](https://travis-ci.org/openfin/node-openfin-launcher.svg?branch=master)](https://travis-ci.org/openfin/node-openfin-launcher)
 
 A node module that downloads and launches the [OpenFin Runtime](http://openfin.co/)
 
