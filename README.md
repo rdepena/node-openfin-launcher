@@ -3,7 +3,7 @@
 
 A node module that downloads and launches the [OpenFin Runtime](http://openfin.co/)
 
-Currently only Windows support.
+Currently only supports Windows.
 
 ### Install
 
