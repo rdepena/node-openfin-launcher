@@ -7,16 +7,19 @@ var exec = require('child_process').exec,
     defaultOptions = {
         rvmPath: path.resolve('OpenFinRVM.exe'),
         rvmUrl: 'https://developer.openfin.co/release/rvm/latest'
-    };
+    },
+    callback;
 
-function launchOpenFin(options) {
+function launchOpenFin(options, cb) {
+    callback = callback || cb;
     //check if we are in windows.
     _.extend(defaultOptions, options);
     if (os.type().toLowerCase().indexOf('windows') > -1) {
         fs.exists(defaultOptions.rvmPath, function (exists) {
             if (exists) {
+                callback();
                 exec(defaultOptions.rvmPath + ' --config="' + defaultOptions.configPath +'"', function callback(error) {
-                    console.log('running openfin');
+                    console.log('running OpenFin');
                     if (error) {
                         console.error(error);
                     }
