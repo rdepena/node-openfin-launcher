@@ -1,6 +1,6 @@
 {
   "name": "openfin-launcher",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "OpenFin launcher",
   "author": "Ricardo de Pena <ricardo.depena@gmail.com>",
   "repository": {
@@ -38,9 +38,5 @@
     "url": "https://github.com/openfin/node-openfin-launcher/issues"
   },
   "homepage": "https://github.com/openfin/node-openfin-launcher",
-  "main": "index.js",
-  "directories": {
-    "test": "test",
-    "lib": "lib"
-  }
+  "main": "index.js"
 }
