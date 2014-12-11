@@ -17,9 +17,7 @@
   ],
   "dependencies": {
     "unzip": "^0.1.11",
-    "lodash": "^2.4.1",
-    "chai": "^1.10.0",
-    "sinon": "^1.12.1"
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "grunt-cli": "^0.1.13",
@@ -29,7 +27,9 @@
     "load-grunt-tasks": "^1.0.0",
     "time-grunt": "^1.0.0",
     "grunt-mocha-cli": "^1.11.0",
-    "jshint-stylish": "^1.0.0"
+    "jshint-stylish": "^1.0.0",
+    "chai": "^1.10.0",
+    "sinon": "^1.12.1"
   },
   "scripts": {
     "test": "grunt"
