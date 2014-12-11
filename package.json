@@ -1,6 +1,6 @@
 {
   "name": "openfin-launcher",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "OpenFin launcher",
   "author": "Ricardo de Pena <ricardo.depena@gmail.com>",
   "repository": {
@@ -8,9 +8,6 @@
     "url": "git://github.com/openfin/node-openfin-launcher"
   },
   "license": "MIT",
-  "files": [
-    "index.js"
-  ],
   "keywords": [
     "openfin-launcher",
     "OpenFin"
