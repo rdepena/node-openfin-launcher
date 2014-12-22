@@ -35,7 +35,6 @@ function launchOpenFin(options) {
             }
         });
     } else {
-        var message
         deffered.reject(new Error(nonSupportedOSMessage));
     }
 
