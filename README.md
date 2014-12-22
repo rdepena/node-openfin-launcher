@@ -18,10 +18,26 @@ $ npm install --save openfin-launcher
 var openfinLauncher = require('openfin-launcher');
 
 //for a non hosted app.json file
-openfinLauncher.launchOpenFin({configPath:'file:/C:/helloWorld/app.json'});
+openfinLauncher.launchOpenFin({
+        configPath: 'file:/C:/helloWorld/app.json'
+    })
+    .then(function() {
+        console.log('success!');
+    })
+    .fail(function(error) {
+        console.log('error!', error);
+    });
 
 //or a hosted app.json file
-openfinLauncher.launchOpenFin({configPath:'http://localhost:5000/app.json'});
+openfinLauncher.launchOpenFin({
+        configPath: 'http://localhost:5000/app.json'
+    })
+    .then(function() {
+        console.log('success!');
+    })
+    .fail(function(error) {
+        console.log('error!', error);
+    });
 ```
 ## License
 
