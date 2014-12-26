@@ -15,7 +15,7 @@ function launchOpenFin(options) {
     var deffered = q.defer();
     //check if we are in windows.
     _.extend(defaultOptions, options);
-    if (true || os.type().toLowerCase().indexOf('windows') > -1) {
+    if (os.type().toLowerCase().indexOf('windows') > -1) {
         fs.exists(defaultOptions.rvmPath, function (exists) {
             if (exists) {
                 exec(defaultOptions.rvmPath + ' --config="' + defaultOptions.configPath +'"', function callback(error) {
