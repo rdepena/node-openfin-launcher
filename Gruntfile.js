@@ -31,19 +31,19 @@ module.exports = function(grunt) {
         watch: {
             gruntfile: {
                 files: '<%= jshint.gruntfile.src %>',
-                tasks: ['jshint:gruntfile']
+                tasks: ['jshint:gruntfile', 'jsbeautifier']
             },
             lib: {
                 files: '<%= jshint.lib.src %>',
-                tasks: ['jshint:lib', 'mochacli']
+                tasks: ['jshint:lib', 'mochacli', 'jsbeautifier']
             },
             test: {
                 files: '<%= jshint.test.src %>',
-                tasks: ['jshint:test', 'mochacli']
+                tasks: ['jshint:test', 'mochacli', 'jsbeautifier']
             }
         },
         jsbeautifier: {
-            files: '<%= jshint.lib.src %>',
+            files: ['<%= jshint.lib.src %>', '<%= jshint.gruntfile.src %>', '<%= jshint.test.src %>'],
             options: {
                 js: {
                     braceStyle: 'collapse',
@@ -69,4 +69,5 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['jshint', 'mochacli', 'jsbeautifier']);
+    console.log();
 };
