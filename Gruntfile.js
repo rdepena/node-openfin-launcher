@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     // Show elapsed time at the end
     require('time-grunt')(grunt);
     // Load all grunt tasks
@@ -12,7 +12,7 @@ module.exports = function (grunt) {
                 reporter: require('jshint-stylish')
             },
             gruntfile: {
-              src: ['Gruntfile.js']
+                src: ['Gruntfile.js']
             },
             lib: {
                 src: ['*.js', 'lib/*.js', '*.json']
@@ -41,8 +41,32 @@ module.exports = function (grunt) {
                 files: '<%= jshint.test.src %>',
                 tasks: ['jshint:test', 'mochacli']
             }
+        },
+        jsbeautifier: {
+            files: '<%= jshint.lib.src %>',
+            options: {
+                js: {
+                    braceStyle: 'collapse',
+                    breakChainedMethods: false,
+                    e4x: false,
+                    evalCode: false,
+                    indentChar: ' ',
+                    indentLevel: 0,
+                    indentSize: 4,
+                    indentWithTabs: false,
+                    jslintHappy: false,
+                    keepArrayIndentation: false,
+                    keepFunctionIndentation: false,
+                    maxPreserveNewlines: 10,
+                    preserveNewlines: true,
+                    spaceBeforeConditional: true,
+                    spaceInParen: false,
+                    unescapeStrings: false,
+                    wrapLineLength: 0
+                }
+            }
         }
     });
 
-    grunt.registerTask('default', ['jshint', 'mochacli']);
+    grunt.registerTask('default', ['jshint', 'mochacli', 'jsbeautifier']);
 };
