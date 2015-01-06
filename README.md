@@ -2,7 +2,7 @@
 #openfin-launcher
 [![Build Status](https://travis-ci.org/openfin/node-openfin-launcher.svg?branch=master)](https://travis-ci.org/openfin/node-openfin-launcher)
 
-A node module that can download and launch the [OpenFin Runtime](http://openfin.co/).
+A Node.js module that can download and launch the [OpenFin Runtime](http://openfin.co/).
 
 Currently only supports Windows.
 
