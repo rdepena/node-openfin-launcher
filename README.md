@@ -10,7 +10,6 @@ OpenFin-Launcher is an Node.js module that automates the downloading and launchi
 ```sh
 $ npm install --save openfin-launcher
 ```
-This will only download the Node.js components, the OpenFin Runtime will automatically download on application launch.
 
 ## Usage
 
