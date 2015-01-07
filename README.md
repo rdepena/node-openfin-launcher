@@ -19,7 +19,7 @@ var openfinLauncher = require('openfin-launcher');
 openfinLauncher.launchOpenFin({
         //Launch a hosted application
         configPath: 'http://localhost:5000/app.json'
-        //Or a form a file path
+        //Or a file path
         //configPath: 'file:/C:/helloWorld/app.json'
     })
     .then(function() {
