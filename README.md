@@ -1,36 +1,27 @@
-
-#openfin-launcher
+#OpenFin-Launcher
 [![Build Status](https://travis-ci.org/openfin/node-openfin-launcher.svg?branch=master)](https://travis-ci.org/openfin/node-openfin-launcher)
 
-A Node.js module that can download and launch the [OpenFin Runtime](http://openfin.co/).
+OpenFin-Launcher is an Node.js module that automates the downloading and launching of The [OpenFin Runtime](http://openfin.co/). This module asumes you have an OpenFin application config file. You can read up on OpenFin application config options on the [OpenFin config file API docs](http://openfin.co/developers.html?url=developers/api/config/overview.html), or generate it automatically with the [openfin-config-builder](https://github.com/openfin/node-openfin-config-builder).
 
-Currently only supports Windows.
+>Currently only supports Windows.
 
-### Install
+## Getting Started
 
 ```sh
 $ npm install --save openfin-launcher
 ```
+This will only download the Node.js components, the OpenFin Runtime will automatically download on application launch.
 
-### Usage
+## Usage
 
 ```js
 var openfinLauncher = require('openfin-launcher');
 
-//for a non hosted app.json file
 openfinLauncher.launchOpenFin({
-        configPath: 'file:/C:/helloWorld/app.json'
-    })
-    .then(function() {
-        console.log('success!');
-    })
-    .fail(function(error) {
-        console.log('error!', error);
-    });
-
-//or a hosted app.json file
-openfinLauncher.launchOpenFin({
+        //Launch a hosted application
         configPath: 'http://localhost:5000/app.json'
+        //Or a form a file path
+        //configPath: 'file:/C:/helloWorld/app.json'
     })
     .then(function() {
         console.log('success!');
@@ -53,6 +44,36 @@ openfinLauncher.launchOpenFin({
     });
 
 ```
+
+##Options
+
+####configPath
+Type: `String`
+
+Default Value: ''
+
+OpenFin Application Configuration file path as described in the [OpenFin config file API docs](http://openfin.co/developers.html?url=developers/api/config/overview.html).
+
+Examples: 
+```js
+'http://localhost:3000/app.json'
+'file:/C:/helloWorld/app.json'
+```
+
+####rvmPath
+Type: `String`
+
+Default Value: `path.resolve('OpenFinRVM.exe');`
+
+OpenFin RVM location, if not found at the specified path the latest version will be downloaded.
+
+###rvmUrl
+Type: `String`
+
+Default Value: `https://developer.openfin.co/release/rvm/latest`
+
+Location to the OpenFin RVM downoad URL, if the OpenFin RVM is not found this URL will be used to download the binary.
+
 ## License
 
 MIT
