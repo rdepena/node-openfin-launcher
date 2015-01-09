@@ -15,7 +15,8 @@ function launchOpenFin(options) {
     var deffered = q.defer();
     //check if we are in windows.
     _.extend(defaultOptions, options);
-    if (os.type().toLowerCase().indexOf('windows') > -1) {
+
+    function launch() {
         fs.exists(defaultOptions.rvmPath, function(exists) {
             if (exists) {
                 exec(defaultOptions.rvmPath + ' --config="' + defaultOptions.configPath + '"', function callback(error) {
@@ -30,10 +31,14 @@ function launchOpenFin(options) {
                 //make sure the second time around we specify the local repository.
                 defaultOptions.rvmPath = path.resolve('OpenFinRVM.exe');
                 rvmDownloader.download(defaultOptions.rvmUrl)
-                    .then(launchOpenFin)
+                    .then(launch)
                     .fail(deffered.reject);
             }
         });
+    }
+
+    if (os.type().toLowerCase().indexOf('windows') > -1) {
+        launch();
     } else {
         deffered.reject(new Error(nonSupportedOSMessage));
     }
