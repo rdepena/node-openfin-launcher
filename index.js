@@ -7,7 +7,8 @@ var exec = require('child_process').exec,
     q = require('q'),
     defaultOptions = {
         rvmPath: path.resolve('OpenFinRVM.exe'),
-        rvmUrl: 'https://developer.openfin.co/release/rvm/latest'
+        rvmUrl: 'https://developer.openfin.co/release/rvm/latest',
+        rvmGlobalCommand: null
     },
     nonSupportedOSMessage = 'non windows, launcher not supported.';
 
@@ -18,8 +19,9 @@ function launchOpenFin(options) {
 
     function launch() {
         fs.exists(defaultOptions.rvmPath, function(exists) {
-            if (exists) {
-                exec(defaultOptions.rvmPath + ' --config="' + defaultOptions.configPath + '"', function callback(error) {
+            var executeCommand = defaultOptions.rvmGlobalCommand || defaultOptions.rvmPath;
+            if (exists || defaultOptions.rvmGlobalCommand) {
+                exec(executeCommand + ' --config="' + defaultOptions.configPath + '"', function callback(error) {
                     if (error) {
                         console.error(error);
                         deffered.reject(error);
@@ -47,5 +49,8 @@ function launchOpenFin(options) {
 }
 
 module.exports = {
-    launchOpenFin: launchOpenFin
+    launchOpenFin: launchOpenFin,
+    downloadRvm: function() {
+        return rvmDownloader.download(defaultOptions.rvmUrl);
+    }
 };
