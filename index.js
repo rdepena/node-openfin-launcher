@@ -7,7 +7,7 @@ var exec = require('child_process').exec,
     q = require('q'),
     defaultOptions = {
         rvmPath: path.resolve('OpenFinRVM.exe'),
-        rvmUrl: 'https://developer.openfin.co/release/rvm/latest',
+        rvmUrl: 'https://developer.openfin.co/release/rvm/0.1.0.44',
         rvmGlobalCommand: null
     },
     nonSupportedOSMessage = 'non windows, launcher not supported.';
