@@ -21,7 +21,7 @@ function launchOpenFin(options) {
         fs.exists(defaultOptions.rvmPath, function(exists) {
             var executeCommand = defaultOptions.rvmGlobalCommand || defaultOptions.rvmPath;
             if (exists || defaultOptions.rvmGlobalCommand) {
-                exec('"' + executeCommand + '" --config="' + defaultOptions.configPath + '"', function callback(error) {
+                exec(executeCommand + ' --config="' + defaultOptions.configPath + '"', function callback(error) {
                     if (error) {
                         console.error(error);
                         deffered.reject(error);
