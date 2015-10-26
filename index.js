@@ -1,11 +1,10 @@
 var exec = require('child_process').exec,
     os = require('os'),
+    isWindows = os.type().toLowerCase().indexOf('windows') !== -1,
+    isXP = isWindows && os.release() < '6.0',
     nonSupportedOSMessage = 'non windows, launcher not supported.';
 
-
 //kick out if not in windows
-var isWindows = os.type().toLowerCase().indexOf('windows') !== -1;
-
 if (!isWindows) {
     console.log(nonSupportedOSMessage);
     process.exit();
@@ -16,10 +15,14 @@ var path = require('path'),
     rvmDownloader = require('./lib/rvm-downloader'),
     fs = require('fs'),
     _ = require('lodash'),
-    q = require('q');
+    q = require('q'),
+    xpLocation = '\\Local Settings\\Application Data\\OpenFin';
+
+    //at least windows 8 or greater
+    var eightOrGreater = '\\AppData\\Local\\OpenFin';
 
     // this is equivalent to %localappdata%\OpenFin
-    var defaultAppData = path.join(process.env['USERPROFILE'],'\\AppData\\Local\\OpenFin'),
+    var defaultAppData = path.join(process.env['USERPROFILE'], isXP ? xpLocation : eightOrGreater),
     defaultOptions = {
         rvmPath: path.resolve(defaultAppData, 'OpenFinRVM.exe'),
         rvmUrl: 'https://developer.openfin.co/release/rvm/0.1.0.44',
