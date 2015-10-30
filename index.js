@@ -1,38 +1,60 @@
 var exec = require('child_process').exec,
     os = require('os'),
-    path = require('path'),
+    isWindows = os.type().toLowerCase().indexOf('windows') !== -1,
+    isXP = isWindows && os.release() < '6.0',
+    nonSupportedOSMessage = 'non windows, launcher not supported.';
+
+//kick out if not in windows
+if (!isWindows) {
+    console.log(nonSupportedOSMessage);
+    process.exit();
+} 
+
+
+var path = require('path'),
     rvmDownloader = require('./lib/rvm-downloader'),
     fs = require('fs'),
     _ = require('lodash'),
     q = require('q'),
+    xpLocation = '\\Local Settings\\Application Data\\OpenFin';
+
+    //at least windows 8 or greater
+    var eightOrGreater = '\\AppData\\Local\\OpenFin';
+
+    // this is equivalent to %localappdata%\OpenFin
+    var defaultAppData = path.join(process.env['USERPROFILE'], isXP ? xpLocation : eightOrGreater),
     defaultOptions = {
-        rvmPath: path.resolve('OpenFinRVM.exe'),
+        rvmPath: path.resolve(defaultAppData, 'OpenFinRVM.exe'),
         rvmUrl: 'https://developer.openfin.co/release/rvm/0.1.0.44',
-        rvmGlobalCommand: null
-    },
-    nonSupportedOSMessage = 'non windows, launcher not supported.';
+        rvmGlobalCommand: null //this is undocumented, do we still need it?
+    };
 
 function launchOpenFin(options) {
     var deffered = q.defer();
-    //check if we are in windows.
-    _.extend(defaultOptions, options);
+    
+    // use the options, filling in the defaults without clobbering them 
+    var combinedOpts = _.defaults(_.clone(options), defaultOptions);
 
     function launch() {
-        fs.exists(defaultOptions.rvmPath, function(exists) {
-            var executeCommand = defaultOptions.rvmGlobalCommand || defaultOptions.rvmPath;
-            if (exists || defaultOptions.rvmGlobalCommand) {
-                exec(executeCommand + ' --config="' + defaultOptions.configPath + '"', function callback(error) {
+        fs.exists(path.resolve(combinedOpts.rvmPath), function(exists) {
+            
+            if (exists) {
+                
+                // change the working dir to either the custom location or the 
+                // default OpenFin dir in local app data
+                process.chdir(path.resolve(path.dirname(combinedOpts.rvmPath)));
+
+                exec('OpenFinRVM.exe --config="' + combinedOpts.configPath + '"', function callback(error) {
                     if (error) {
-                        console.error(error);
                         deffered.reject(error);
                     }
                     deffered.resolve();
                 });
+
             } else {
                 console.log('no rvm found at specified location, downloading');
-                //make sure the second time around we specify the local repository.
-                defaultOptions.rvmPath = path.resolve('OpenFinRVM.exe');
-                rvmDownloader.download(defaultOptions.rvmUrl)
+                
+                rvmDownloader.download(combinedOpts.rvmUrl)
                     .then(launch)
                     .fail(deffered.reject);
             }

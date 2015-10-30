@@ -10,3 +10,13 @@ describe('openfin-launcher', function() {
         });
     });
 });
+
+/*
+var ofl = require('./index');
+ofl.launchOpenFin({configPath: 'http://local:8080/app.json'});
+
+
+var ofl = require('./index');
+ofl.launchOpenFin({configPath: 'http://cdn.openfin.co/demos/lightstreamer/app.json'});
+
+ */
