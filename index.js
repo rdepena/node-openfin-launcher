@@ -53,7 +53,7 @@ function launchOpenFin(options) {
                 });
 
             } else {
-                console.log('no rvm found at specified location, downloading to', combinedOpts.rvmUrl);
+                console.log('no rvm found at specified location, downloading from ', combinedOpts.rvmUrl);
                 
                 rvmDownloader.download(combinedOpts.rvmUrl, path.resolve(combinedOpts.rvmPath))
                     .then(launch)
