@@ -1,7 +1,7 @@
 var exec = require('child_process').exec,
     os = require('os'),
     isWindows = os.type().toLowerCase().indexOf('windows') !== -1,
-    isXP = isWindows && os.release() < '6.0',
+    isXP = isWindows && (+os.release().split('.')[0]) < 6,
     nonSupportedOSMessage = 'non windows, launcher not supported.';
 
 //kick out if not in windows
@@ -49,12 +49,13 @@ function launchOpenFin(options) {
                         deffered.reject(error);
                     }
                     deffered.resolve();
+
                 });
 
             } else {
-                console.log('no rvm found at specified location, downloading');
+                console.log('no rvm found at specified location, downloading to', combinedOpts.rvmUrl);
                 
-                rvmDownloader.download(combinedOpts.rvmUrl)
+                rvmDownloader.download(combinedOpts.rvmUrl, path.resolve(combinedOpts.rvmPath))
                     .then(launch)
                     .fail(deffered.reject);
             }
