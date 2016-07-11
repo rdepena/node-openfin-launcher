@@ -1,11 +1,11 @@
-var os = require('os');
 var rvmDownloader = require('./lib/rvm-downloader');
 var nixLauncher = require('./lib/nix-launcher');
 var winLauncher = require('./lib/win-launcher');
 var expandOptions = require('./lib/expand-options');
+var assetUtilities = require('./lib/asset-utilities');
 
-var isWindows = os.type().toLowerCase().indexOf('windows') !== -1;
-var launchOpenFin = isWindows ? winLauncher.launchOpenFin : nixLauncher.launchOpenFin;
+var runningOs = assetUtilities.getRunningOs();
+var launchOpenFin = runningOs === assetUtilities.OS_TYPES.windows ? winLauncher.launchOpenFin : nixLauncher.launchOpenFin;
 
 module.exports = {
     launchOpenFin: launchOpenFin,
