@@ -3,7 +3,22 @@
 
 OpenFin-Launcher is an Node.js module that automates the downloading and launching of The [OpenFin Runtime](http://openfin.co/). This module asumes you have an application config file. You can read up on application config options on the [OpenFin config file API docs](http://openfin.co/developers.html?url=developers/api/config/overview.html), or generate it automatically with the [openfin-config-builder](https://github.com/openfin/node-openfin-config-builder).
 
->Currently only supports Windows.
+## Dependencies
+
+##### Windows
+
+* [Node.js](https://nodejs.org/) v0.10 or higher
+
+##### Mac
+
+* [Node.js](https://nodejs.org/) v0.10 or higher
+* OpenFin Version 6 or higher
+
+##### Linux
+
+* [Node.js](https://nodejs.org/) v0.10 or higher
+* OpenFin Version 6 or higher
+* [unzip](http://www.info-zip.org/pub/infozip/) part of distro or obtained via package manager (apt-get, pacman, etc...)
 
 ## Getting Started
 
@@ -57,6 +72,7 @@ Examples:
 ```js
 'http://localhost:3000/app.json'
 'file:/C:/helloWorld/app.json'
+'/home/userx/app.json'
 ```
 
 ####rvmPath
