@@ -35,7 +35,7 @@ openfinLauncher.launchOpenFin({
         //Launch a hosted application
         configPath: 'http://localhost:5000/app.json'
         //Or a file path
-        //configPath: 'file:/C:/helloWorld/app.json'
+        //configPath: 'C:/helloWorld/app.json'
     })
     .then(function() {
         console.log('success!');
@@ -71,7 +71,7 @@ OpenFin Application Configuration file path as described in the [OpenFin config 
 Examples: 
 ```js
 'http://localhost:3000/app.json'
-'file:/C:/helloWorld/app.json'
+'C:/helloWorld/app.json'
 '/home/userx/app.json'
 ```
 
