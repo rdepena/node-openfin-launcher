@@ -3,7 +3,7 @@
 var expect = require('chai').expect;
 
 describe('rvm downloader', function() {
-    var rvmDownloader = require('../lib/rvm-downloader.js');
+    var rvmDownloader = require('../src/rvm-downloader.js');
 
     describe('download function', function() {
         it('should exist', function() {

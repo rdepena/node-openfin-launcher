@@ -15,8 +15,8 @@ module.exports = function(grunt) {
             gruntfile: {
                 src: ['Gruntfile.js']
             },
-            lib: {
-                src: ['*.js', 'lib/*.js', '*.json']
+            src: {
+                src: ['*.js', 'src/*.js', '*.json']
             },
             test: {
                 src: ['test/**/*.js']
@@ -34,9 +34,9 @@ module.exports = function(grunt) {
                 files: '<%= jshint.gruntfile.src %>',
                 tasks: ['jshint:gruntfile', 'jsbeautifier']
             },
-            lib: {
-                files: '<%= jshint.lib.src %>',
-                tasks: ['jshint:lib', 'mochacli', 'jsbeautifier']
+            src: {
+                files: '<%= jshint.src.src %>',
+                tasks: ['jshint:src', 'mochacli', 'jsbeautifier']
             },
             test: {
                 files: '<%= jshint.test.src %>',
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
             }
         },
         jsbeautifier: {
-            files: ['<%= jshint.lib.src %>', '<%= jshint.gruntfile.src %>', '<%= jshint.test.src %>'],
+            files: ['<%= jshint.src.src %>', '<%= jshint.gruntfile.src %>', '<%= jshint.test.src %>'],
             options: {
                 js: {
                     braceStyle: 'collapse',

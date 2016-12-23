@@ -50,7 +50,15 @@ function launch(options) {
                     });
 
                     of.stdout.on('data', function(data) {
-                        console.log("" + data);
+                        var sData = "" + data;
+
+                        if (options.noAttach) {
+                            if (sData.indexOf("Opened on")) {
+                                deffered.resolve();
+                            }
+                        } else {
+                            console.log(sData);
+                        }
                     });
                     of.stderr.on('data', function(data) {
                         console.log("" + data);
