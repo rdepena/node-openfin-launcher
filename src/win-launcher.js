@@ -25,7 +25,6 @@ function launchOpenFin(options) {
                 });
                 rvm.stdout.on('data', function(data) {
                     var sData = '' + data;
-                    console.log('' + data);
                     if (options.noAttach) {
                         if (sData.indexOf("application-event") > -1) {
                             // change the working dir back
