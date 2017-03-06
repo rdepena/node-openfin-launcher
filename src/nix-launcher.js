@@ -50,10 +50,10 @@ function launch(options) {
                     });
 
                     of.stdout.on('data', function(data) {
-                        var sData = "" + data;
+                        var sData = '' + data;
 
                         if (options.noAttach) {
-                            if (sData.indexOf("Opened on")) {
+                            if (sData.indexOf('Opened on')) {
                                 deffered.resolve();
                             }
                         } else {
@@ -61,7 +61,7 @@ function launch(options) {
                         }
                     });
                     of.stderr.on('data', function(data) {
-                        console.log("" + data);
+                        console.log('' + data);
                     });
 
                     of.on('exit', function(code) {
