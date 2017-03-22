@@ -43,9 +43,13 @@ function launch(options) {
                 if (err) {
                     deffered.reject(err);
                 } else {
-                    //BUG: in linux there is a bug were '--no-sandbox' is not only required but it needs to be the only thing.
-                    var args = assetUtilities.getRunningOs() !== assetUtilities.OS_TYPES.linux ? config.runtime.arguments : '--no-sandbox';
-                    var of = spawn(runtimePath, ['--startup-url="' + combinedOpts.configPath + '" ', args], {
+                    var args = config.runtime.arguments ? config.runtime.arguments.split(' ') : [];
+                    //BUG: in linux there is a bug were '--no-sandbox' is required.
+                    if (assetUtilities.getRunningOs() === assetUtilities.OS_TYPES.linux) {
+                        args.push('--no-sandbox');
+                    }
+                    args.unshift('--startup-url="' + combinedOpts.configPath + '" ');
+                    var of = spawn(runtimePath, args, {
                         encoding: 'utf8'
                     });
 
