@@ -1,5 +1,4 @@
 var os = require('os');
-var _ = require('lodash');
 var path = require('path');
 
 var xpLocation = '\\Local Settings\\Application Data\\OpenFin';
@@ -23,7 +22,7 @@ function expand(options) {
         defaultOptions.macAppPath = '/Applications/OpenFin.app';
     }
     // use the options, filling in the defaults without clobbering them
-    return _.defaults(_.clone(options), defaultOptions);
+    return Object.assign(options, defaultOptions);
 
 }
 

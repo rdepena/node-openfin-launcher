@@ -70,5 +70,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['jshint', 'mochacli', 'jsbeautifier']);
+    grunt.registerTask('test', ['jshint', 'mochacli']);
     console.log();
 };

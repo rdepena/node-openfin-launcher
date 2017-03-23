@@ -1,43 +1,43 @@
 {
-    "name": "openfin-launcher",
-    "version": "1.3.12",
-    "description": "OpenFin launcher",
-    "author": "Ricardo de Pena <ricardo.depena@gmail.com>",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/openfin/node-openfin-launcher"
-    },
-    "license": "MIT",
-    "keywords": [
-        "openfin-launcher",
-        "OpenFin"
-    ],
-    "dependencies": {
-        "lodash": "^2.4.1",
-        "q": "^1.1.2",
-        "request": "^2.69.0",
-        "single-line-log": "^1.1.1",
-        "unzip": "^0.1.11"
-    },
-    "devDependencies": {
-        "grunt-cli": "^0.1.13",
-        "grunt-contrib-jshint": "^0.10.0",
-        "grunt-contrib-nodeunit": "^0.4.1",
-        "grunt-contrib-watch": "^0.6.1",
-        "load-grunt-tasks": "^1.0.0",
-        "time-grunt": "^1.0.0",
-        "grunt-mocha-cli": "^1.11.0",
-        "jshint-stylish": "^1.0.0",
-        "chai": "^1.10.0",
-        "sinon": "^1.12.1",
-        "grunt-jsbeautifier": "^0.2.7"
-    },
-    "scripts": {
-        "test": "grunt"
-    },
-    "bugs": {
-        "url": "https://github.com/openfin/node-openfin-launcher/issues"
-    },
-    "homepage": "https://github.com/openfin/node-openfin-launcher",
-    "main": "index.js"
+  "name": "openfin-launcher",
+  "version": "2.0.1",
+  "description": "OpenFin launcher",
+  "author": "Ricardo de Pena <ricardo.depena@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/openfin/node-openfin-launcher"
+  },
+  "license": "MIT",
+  "keywords": [
+    "openfin-launcher",
+    "OpenFin"
+  ],
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "q": "^1.1.2",
+    "request": "^2.69.0",
+    "single-line-log": "^1.1.1",
+    "unzip": "^0.1.11"
+  },
+  "devDependencies": {
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "load-grunt-tasks": "^1.0.0",
+    "time-grunt": "^1.0.0",
+    "grunt-mocha-cli": "^1.11.0",
+    "jshint-stylish": "^1.0.0",
+    "chai": "^1.10.0",
+    "sinon": "^1.12.1",
+    "grunt-jsbeautifier": "^0.2.7"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "bugs": {
+    "url": "https://github.com/openfin/node-openfin-launcher/issues"
+  },
+  "homepage": "https://github.com/openfin/node-openfin-launcher",
+  "main": "index.js"
 }
