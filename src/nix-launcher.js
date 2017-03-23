@@ -1,5 +1,4 @@
 var spawn = require('child_process').spawn;
-var q = require('q');
 var expandOptions = require('./expand-options');
 var assetFetcher = require('./asset-fetcher');
 var assetUtilities = require('./asset-utilities');
@@ -8,80 +7,82 @@ function isURL(str) {
     return (typeof str === 'string') && str.lastIndexOf('http') >= 0;
 }
 
-function download(url, existingDeffered) {
-    var deffered = existingDeffered || q.defer();
-    assetFetcher.getData(url, function(err, data) {
-        if (err) {
-            deffered.reject(err);
-        } else {
-            deffered.resolve(data);
-        }
+function download(url) {
+    return new Promise((resolve, reject) => {
+        assetFetcher.getData(url, function(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
     });
-    return deffered.promise;
 }
 
 function getConfig(configPath) {
-    var deffered = q.defer();
-    if (isURL(configPath)) {
-        return download(configPath).then(function(config) {
-            return JSON.parse(config);
-        });
-    } else {
-        var appConfig = require(configPath);
-        deffered.resolve(appConfig);
-    }
-    return deffered.promise;
+    return new Promise((resolve) => {
+        if (isURL(configPath)) {
+            return download(configPath).then(function(config) {
+                return JSON.parse(config);
+            });
+        } else {
+            //TODO: this should not require the file in.
+            var appConfig = require(configPath);
+            resolve(appConfig);
+        }
+    });
 }
 
 function launch(options) {
-    var deffered = q.defer();
-    var combinedOpts = expandOptions(options);
-
-    getConfig(combinedOpts.configPath).then(function(config) {
-        try {
-            assetUtilities.downloadRuntime(config.runtime.version, function(err, runtimePath) {
-                if (err) {
-                    deffered.reject(err);
-                } else {
-                    var args = config.runtime.arguments ? config.runtime.arguments.split(' ') : [];
-                    //BUG: in linux there is a bug were '--no-sandbox' is required.
-                    if (assetUtilities.getRunningOs() === assetUtilities.OS_TYPES.linux) {
-                        args.push('--no-sandbox');
-                    }
-                    args.unshift('--startup-url="' + combinedOpts.configPath + '" ');
-                    var of = spawn(runtimePath, args, {
-                        encoding: 'utf8'
-                    });
-
-                    of.stdout.on('data', function(data) {
-                        var sData = '' + data;
-
-                        if (options.noAttach) {
-                            if (sData.indexOf('Opened on')) {
-                                deffered.resolve();
-                            }
-                        } else {
-                            console.log(sData);
+    return new Promise((resolve, reject) => {
+        const combinedOpts = expandOptions(options);
+        
+        getConfig(combinedOpts.configPath).then(function(config) {
+            try {
+                assetUtilities.downloadRuntime(config.runtime.version, (err, runtimePath) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        const args = config.runtime.arguments ? config.runtime.arguments.split(' ') : [];
+                        //BUG: in linux there is a bug were '--no-sandbox' is required.
+                        if (assetUtilities.getRunningOs() === assetUtilities.OS_TYPES.linux) {
+                            args.push('--no-sandbox');
                         }
-                    });
-                    of.stderr.on('data', function(data) {
-                        console.log('' + data);
-                    });
-
-                    of.on('exit', function(code) {
-                        console.log(code);
-                        deffered.resolve(code);
-                    });
-                }
-            });
-        } catch (error) {
-            console.log(error);
-            deffered.reject(error);
-        }
-    }).fail(function(err) {
-        deffered.reject(err);
+                        args.unshift('--startup-url="' + combinedOpts.configPath + '" ');
+                        const of = spawn(runtimePath, args, {
+                            encoding: 'utf8'
+                        });
+                        
+                        of.stdout.on('data', data => {
+                            var sData = '' + data;
+                            
+                            if (options.noAttach) {
+                                if (sData.indexOf('Opened on')) {
+                                    resolve();
+                                }
+                            } else {
+                                console.log(sData);
+                            }
+                        });
+                        of.stderr.on('data', data => {
+                            console.log('' + data);
+                        });
+                        
+                        of.on('exit', code => {
+                            console.log(code);
+                            resolve(code);
+                        });
+                    }
+                });
+            } catch (error) {
+                console.log(error);
+                reject(error);
+            }
+        }).catch(err => {
+            reject(err);
+        });
+        
     });
-    return deffered.promise;
 }
 
 module.exports = {
