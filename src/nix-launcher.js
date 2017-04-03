@@ -48,7 +48,7 @@ function launch(options) {
                     if (assetUtilities.getRunningOs() === assetUtilities.OS_TYPES.linux) {
                         args.push('--no-sandbox');
                     }
-                    args.unshift('--startup-url="' + combinedOpts.configPath + '" ');
+                    args.unshift('--startup-url="' + combinedOpts.configPath + '"');
                     var of = spawn(runtimePath, args, {
                         encoding: 'utf8'
                     });
