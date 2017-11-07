@@ -53,7 +53,7 @@ function launch(options) {
                         encoding: 'utf8'
                     });
 
-                    of .stdout.on('data', function(data) {
+                    of.stdout.on('data', function(data) {
                         var sData = '' + data;
 
                         if (options.noAttach) {
@@ -63,11 +63,12 @@ function launch(options) {
                         } else {
                             console.log(sData);
                         }
-                    }); of .stderr.on('data', function(data) {
+                    });
+                    of.stderr.on('data', function(data) {
                         console.log('' + data);
                     });
 
-                    of .on('exit', function(code) {
+                    of.on('exit', function(code) {
                         console.log(code);
                         deffered.resolve(code);
                     });
