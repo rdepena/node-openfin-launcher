@@ -49,6 +49,7 @@ function launch(options) {
                         args.push('--no-sandbox');
                     }
                     args.unshift('--startup-url="' + combinedOpts.configPath + '"');
+                    args.push('--version-keyword=' + config.runtime.version);
                     var of = spawn(runtimePath, args, {
                         encoding: 'utf8'
                     });

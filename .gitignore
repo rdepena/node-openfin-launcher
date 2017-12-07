@@ -2,3 +2,5 @@
 npm-debug.log
 logs
 OpenFinRVM.exe
+
+*.iml
