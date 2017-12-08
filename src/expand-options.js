@@ -26,13 +26,17 @@ function expand(options) {
         var isXP = isWindows && (+os.release().split('.')[0]) < 6;
         var defaultAppData = path.join(process.env['USERPROFILE'], isXP ? xpLocation : winEightOrGreater);
 
-        var openFinRvmRegistry = windows.registry('HKCU/Software/OpenFin/RVM/Settings/Deployment');
+        try {
+            var openFinRvmRegistry = windows.registry('HKCU/Software/OpenFin/RVM/Settings/Deployment');
 
-        // if a custom rvmInstallDirectory registry key is set, use its value instead of default location
-        if (openFinRvmRegistry.rvmInstallDirectory !== undefined) {
-            defaultAppData = path.normalize(resolveToAbsolutePath(openFinRvmRegistry.rvmInstallDirectory.value.toString()));
+            // if a custom rvmInstallDirectory registry key is set, use its value instead of default location
+            if (openFinRvmRegistry.rvmInstallDirectory !== undefined) {
+                defaultAppData = path.normalize(resolveToAbsolutePath(openFinRvmRegistry.rvmInstallDirectory.value.toString()));
 
-            console.log("rvmInstallDirectory found.  Using RVM Location: ", defaultAppData);
+                console.log("rvmInstallDirectory found.  Using RVM Location: ", defaultAppData);
+            }
+        } catch (err) {
+            console.log('deployment group policy not found, launching from:', defaultAppData);
         }
 
         defaultOptions.rvmPath = path.resolve(defaultAppData, 'OpenFinRVM.exe');
