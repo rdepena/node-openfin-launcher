@@ -33,9 +33,6 @@
         "sinon": "^1.12.1",
         "time-grunt": "^1.0.0"
     },
-    "optionalDependencies": {
-        "windows": "0.0.6"
-    },
     "scripts": {
         "test": "grunt"
     },
