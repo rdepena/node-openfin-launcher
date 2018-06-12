@@ -151,7 +151,7 @@ function downloadRuntime(version, cb) {
                                     log('Download complete, now unziping \n');
                                     unzipFile(tmpFile, dstFolder, function() {
                                         log('Unzip complete, starting runtime \n');
-                                        fs.unlink(tmpFile);
+                                        fs.unlinkSync(tmpFile);
                                         downloadRuntime(version, cb);
                                     });
                                 }
