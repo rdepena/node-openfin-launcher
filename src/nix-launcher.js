@@ -50,6 +50,9 @@ function launch(options) {
                     }
                     args.unshift('--startup-url="' + combinedOpts.configPath + '"');
                     args.push('--version-keyword=' + config.runtime.version);
+                    if (config.devtools_port) {
+                        args.push('--remote-debugging-port=' + config.devtools_port);
+                    }
                     var of = spawn(runtimePath, args, {
                         encoding: 'utf8'
                     });
@@ -64,7 +67,7 @@ function launch(options) {
                         } else {
                             console.log(sData);
                         }
-                    });
+                    }); 
                     of.stderr.on('data', function(data) {
                         console.log('' + data);
                     });
