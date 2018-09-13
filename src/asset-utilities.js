@@ -7,7 +7,7 @@ var log = require('single-line-log').stdout;
 var spawn = require('child_process').spawn;
 
 var home = process.env.HOME;
-var runtimeRoot = process.env.RUNTIME_ROOT || 'https://developer.openfin.co/release/runtime/';
+var runtimeRoot = process.env.RUNTIME_ROOT || 'https://cdn.openfin.co/release/runtime/';
 
 var OS_TYPES = {
     windows: 0,
@@ -81,7 +81,7 @@ function unzipFile(file, output, cb) {
 }
 
 function resolveRuntimeVersion(channel, cb) {
-    var u = runtimeRoot + channel;
+    var u = getDownloadLocation(channel);
     assetFetcher.requestWithRetry(u, 'HEAD', function(err, response) {
         if (err) {
             cb(null);
