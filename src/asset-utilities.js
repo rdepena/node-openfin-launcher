@@ -81,7 +81,7 @@ function unzipFile(file, output, cb) {
 }
 
 function resolveRuntimeVersion(channel, cb) {
-    var u = getDownloadLocation(channel);
+    var u = runtimeRoot + channel;
     assetFetcher.requestWithRetry(u, 'HEAD', function(err, response) {
         if (err) {
             cb(null);
