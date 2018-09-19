@@ -10,7 +10,7 @@ var isMac = os.type().toLowerCase().indexOf('darwin') !== -1;
 
 function expand(options) {
     var defaultOptions = {
-        rvmUrl: 'https://developer.openfin.co/release/rvm/latest'
+        rvmUrl: 'https://cdn.openfin.co/release/rvm/latest'
     };
 
     if (isWindows) {

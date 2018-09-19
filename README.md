@@ -48,7 +48,7 @@ openfinLauncher.launchOpenFin({
 openfinLauncher.launchOpenFin({
         configPath: 'http://localhost:5000/app.json',
         rvmPath: 'C:/helloWorld/OpenFinRMV.exe',
-        rvmUrl: 'https://developer.openfin.co/release/rvm/latest'
+        rvmUrl: 'https://cdn.openfin.co/release/rvm/latest'
     })
     .then(function() {
         console.log('success!');
@@ -85,7 +85,7 @@ OpenFin RVM location, if not found at the specified path the latest version will
 ### rvmUrl
 Type: `String`
 
-Default Value: `https://developer.openfin.co/release/rvm/latest`
+Default Value: `https://cdn.openfin.co/release/rvm/latest`
 
 Location to the OpenFin RVM downoad URL, if the OpenFin RVM is not found this URL will be used to download the binary.
 
