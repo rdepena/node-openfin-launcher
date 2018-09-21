@@ -1,7 +1,7 @@
 # OpenFin-Launcher
 [![Build Status](https://travis-ci.org/openfin/node-openfin-launcher.svg?branch=master)](https://travis-ci.org/openfin/node-openfin-launcher)
 
-OpenFin-Launcher is an Node.js module that automates the downloading and launching of The [OpenFin Runtime](http://openfin.co/). This module assumes you have an application config file. You can read up on application config options on the [OpenFin config file API docs](http://openfin.co/developers.html?url=developers/api/config/overview.html), or generate it automatically with the [openfin-config-builder](https://github.com/openfin/node-openfin-config-builder).
+OpenFin-Launcher is a Node.js module that automates the downloading and launching of the [OpenFin Runtime](http://openfin.co/). This module assumes you have an application config file. You can read up on application config options in the [OpenFin config file API docs](https://openfin.co/documentation/application-config/), or generate it automatically with the [openfin-config-builder](https://github.com/openfin/node-openfin-config-builder).
 
 ## Dependencies
 
@@ -66,7 +66,7 @@ Type: `String`
 
 Default Value: ''
 
-OpenFin Application Configuration file path as described in the [OpenFin config file API docs](http://openfin.co/developers.html?url=developers/api/config/overview.html).
+OpenFin Application Configuration file path as described in the [OpenFin config file API docs](https://openfin.co/documentation/application-config/).
 
 Examples: 
 ```js
@@ -82,7 +82,7 @@ Default Value: `path.resolve('OpenFinRVM.exe');`
 
 OpenFin RVM location, if not found at the specified path the latest version will be downloaded.
 
-### rvmUrl
+#### rvmUrl
 Type: `String`
 
 Default Value: `https://cdn.openfin.co/release/rvm/latest`
