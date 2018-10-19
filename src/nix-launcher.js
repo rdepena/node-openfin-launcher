@@ -8,40 +8,40 @@ function isURL(str) {
     return (typeof str === 'string') && str.lastIndexOf('http') >= 0;
 }
 
-function download(url, existingDeffered) {
-    var deffered = existingDeffered || q.defer();
+function download(url, existingDeferred) {
+    var deferred = existingDeferred || q.defer();
     assetFetcher.getData(url, function(err, data) {
         if (err) {
-            deffered.reject(err);
+            deferred.reject(err);
         } else {
-            deffered.resolve(data);
+            deferred.resolve(data);
         }
     });
-    return deffered.promise;
+    return deferred.promise;
 }
 
 function getConfig(configPath) {
-    var deffered = q.defer();
+    var deferred = q.defer();
     if (isURL(configPath)) {
         return download(configPath).then(function(config) {
             return JSON.parse(config);
         });
     } else {
         var appConfig = require(configPath);
-        deffered.resolve(appConfig);
+        deferred.resolve(appConfig);
     }
-    return deffered.promise;
+    return deferred.promise;
 }
 
 function launch(options) {
-    var deffered = q.defer();
+    var deferred = q.defer();
     var combinedOpts = expandOptions(options);
 
     getConfig(combinedOpts.configPath).then(function(config) {
         try {
             assetUtilities.downloadRuntime(config.runtime.version, function(err, runtimePath) {
                 if (err) {
-                    deffered.reject(err);
+                    deferred.reject(err);
                 } else {
                     var args = config.runtime.arguments ? config.runtime.arguments.split(' ') : [];
                     //BUG: in linux there is a bug were '--no-sandbox' is required.
@@ -62,7 +62,7 @@ function launch(options) {
 
                         if (options.noAttach) {
                             if (sData.indexOf('Opened on')) {
-                                deffered.resolve();
+                                deferred.resolve();
                             }
                         } else {
                             console.log(sData);
@@ -74,18 +74,18 @@ function launch(options) {
 
                     of.on('exit', function(code) {
                         console.log(code);
-                        deffered.resolve(code);
+                        deferred.resolve(code);
                     });
                 }
             });
         } catch (error) {
             console.log(error);
-            deffered.reject(error);
+            deferred.reject(error);
         }
     }).fail(function(err) {
-        deffered.reject(err);
+        deferred.reject(err);
     });
-    return deffered.promise;
+    return deferred.promise;
 }
 
 module.exports = {

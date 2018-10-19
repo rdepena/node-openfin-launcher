@@ -5,25 +5,25 @@ var fs = require('fs');
 var path = require('path');
 
 function download(url, writePath) {
-    var deffered = q.defer();
+    var deferred = q.defer();
     var tmpLocation = '.rvmTmp';
     assetFetcher.downloadFile(url, tmpLocation, function(err) {
         if (err) {
-            deffered.reject(err);
+            deferred.reject(err);
         } else {
             assetUtilities.unzipFile(tmpLocation, path.dirname(writePath), function(unzipErr) {
                 if (unzipErr) {
-                    deffered.reject(unzipErr);
+                    deferred.reject(unzipErr);
                 } else {
                     fs.unlink(tmpLocation);
                     //unzip pipe finishes early and the file is still being moved by the OS, need to wait it out.
-                    setTimeout(deffered.resolve, 300);
+                    setTimeout(deferred.resolve, 300);
                 }
             });
         }
     });
 
-    return deffered.promise;
+    return deferred.promise;
 }
 
 module.exports = {

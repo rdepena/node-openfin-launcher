@@ -8,7 +8,7 @@ var expandOptions = require('./expand-options');
 
 
 function launchOpenFin(options) {
-    var deffered = q.defer();
+    var deferred = q.defer();
     var combinedOpts = expandOptions(options);
 
     function launch() {
@@ -29,7 +29,7 @@ function launchOpenFin(options) {
                         if (sData.indexOf("application-event") > -1) {
                             // change the working dir back
                             process.chdir(wd);
-                            deffered.resolve();
+                            deferred.resolve();
                         }
                     }
                 });
@@ -37,7 +37,7 @@ function launchOpenFin(options) {
                 rvm.on('exit', function(code) {
                     // change the working dir back
                     process.chdir(wd);
-                    deffered.resolve(code);
+                    deferred.resolve(code);
                 });
 
             } else {
@@ -45,12 +45,12 @@ function launchOpenFin(options) {
 
                 rvmDownloader.download(combinedOpts.rvmUrl, path.resolve(combinedOpts.rvmPath))
                     .then(launch)
-                    .fail(deffered.reject);
+                    .fail(deferred.reject);
             }
         });
     }
     launch();
-    return deffered.promise;
+    return deferred.promise;
 }
 
 module.exports = {
