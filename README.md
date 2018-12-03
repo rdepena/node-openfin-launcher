@@ -1,8 +1,8 @@
+# Deprecated!
+This library has been deprecated, please use the `launch` functionallity in the [js-adapter](https://github.com/hadoukenio/js-adapter) library.
+
 # OpenFin-Launcher
 [![Build Status](https://travis-ci.org/openfin/node-openfin-launcher.svg?branch=master)](https://travis-ci.org/openfin/node-openfin-launcher)
-
-## Deprecated!
-This library has been deprecated, please use the `launch` functionallity in the [js-adapter](https://github.com/hadoukenio/js-adapter) library.
 
 OpenFin-Launcher is a Node.js module that automates the downloading and launching of the [OpenFin Runtime](http://openfin.co/). This module assumes you have an application config file. You can read up on application config options in the [OpenFin config file API docs](https://openfin.co/documentation/application-config/), or generate it automatically with the [openfin-config-builder](https://github.com/openfin/node-openfin-config-builder).
 
